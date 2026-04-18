@@ -7,12 +7,7 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 describe("AnalysisClient", () => {
     test("analyze_news_api_v1_analyze_news_post (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SecsuiteApiClient({
-            maxRetries: 0,
-            betterAuthApiKey: { apiKey: "test" },
-            betterAuthSessionCookie: { sessionCookie: "test" },
-            environment: server.baseUrl,
-        });
+        const client = new SecsuiteApiClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { text: "text" };
         const rawResponseBody = {
             risk_level: "risk_level",
@@ -39,12 +34,7 @@ describe("AnalysisClient", () => {
 
     test("analyze_news_api_v1_analyze_news_post (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SecsuiteApiClient({
-            maxRetries: 0,
-            betterAuthApiKey: { apiKey: "test" },
-            betterAuthSessionCookie: { sessionCookie: "test" },
-            environment: server.baseUrl,
-        });
+        const client = new SecsuiteApiClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { text: "x" };
         const rawResponseBody = { key: "value" };
 

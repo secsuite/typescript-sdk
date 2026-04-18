@@ -3,9 +3,8 @@
 import * as core from "../core/index.js";
 import * as errors from "../errors/index.js";
 
-const WRAPPER_PROPERTY = "betterAuthSessionCookie" as const;
-const PARAM_KEY = "sessionCookie" as const;
-const HEADER_NAME = "Cookie" as const;
+const PARAM_KEY = "apiKey" as const;
+const HEADER_NAME = "x-api-key" as const;
 
 export class HeaderAuthProvider implements core.AuthProvider {
     private readonly options: HeaderAuthProvider.Options;
@@ -15,7 +14,7 @@ export class HeaderAuthProvider implements core.AuthProvider {
     }
 
     public static canCreate(options: Partial<HeaderAuthProvider.Options>): boolean {
-        return options?.[WRAPPER_PROPERTY]?.[PARAM_KEY] != null;
+        return options?.[PARAM_KEY] != null;
     }
 
     public async getAuthRequest({
@@ -23,7 +22,7 @@ export class HeaderAuthProvider implements core.AuthProvider {
     }: {
         endpointMetadata?: core.EndpointMetadata;
     } = {}): Promise<core.AuthRequest> {
-        const headerValue = await core.Supplier.get(this.options[WRAPPER_PROPERTY]?.[PARAM_KEY]);
+        const headerValue = await core.Supplier.get(this.options[PARAM_KEY]);
         if (headerValue == null) {
             throw new errors.SecsuiteApiError({
                 message: HeaderAuthProvider.AUTH_CONFIG_ERROR_MESSAGE,
@@ -37,13 +36,11 @@ export class HeaderAuthProvider implements core.AuthProvider {
 }
 
 export namespace HeaderAuthProvider {
-    export const AUTH_SCHEME = "BetterAuthSessionCookie" as const;
+    export const AUTH_SCHEME = "BetterAuthApiKey" as const;
     export const AUTH_CONFIG_ERROR_MESSAGE: string =
         `Please provide '${PARAM_KEY}' when initializing the client` as const;
     export type Options = AuthOptions;
-    export type AuthOptions = {
-        [WRAPPER_PROPERTY]?: { [PARAM_KEY]: core.Supplier<string> };
-    };
+    export type AuthOptions = { [PARAM_KEY]: core.Supplier<string> };
 
     export function createInstance(options: Options): core.AuthProvider {
         return new HeaderAuthProvider(options);

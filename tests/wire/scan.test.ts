@@ -7,12 +7,7 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 describe("ScanClient", () => {
     test("urlScanPost (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SecsuiteApiClient({
-            maxRetries: 0,
-            betterAuthApiKey: { apiKey: "test" },
-            betterAuthSessionCookie: { sessionCookie: "test" },
-            environment: server.baseUrl,
-        });
+        const client = new SecsuiteApiClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { url: "url" };
         const rawResponseBody = {
             url: "url",
@@ -104,12 +99,7 @@ describe("ScanClient", () => {
 
     test("urlScanPost (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SecsuiteApiClient({
-            maxRetries: 0,
-            betterAuthApiKey: { apiKey: "test" },
-            betterAuthSessionCookie: { sessionCookie: "test" },
-            environment: server.baseUrl,
-        });
+        const client = new SecsuiteApiClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { url: "x" };
         const rawResponseBody = { key: "value" };
 
