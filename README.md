@@ -43,7 +43,7 @@ Instantiate and use the client with the following:
 ```typescript
 import { SecsuiteApiClient } from "@secsuite/typescript-sdk";
 
-const client = new SecsuiteApiClient({ apiKey: "YOUR_API_KEY" });
+const client = new SecsuiteApiClient({ apiKey: "YOUR_API_KEY", sessionCookie: "YOUR_SESSION_COOKIE" });
 await client.scan.urlScanPost({
     url: "url"
 });

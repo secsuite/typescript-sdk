@@ -7,7 +7,12 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 describe("SecsuiteApiClient", () => {
     test("predict_predict__twitter_id__get (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SecsuiteApiClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const client = new SecsuiteApiClient({
+            maxRetries: 0,
+            betterAuthApiKey: { apiKey: "test" },
+            betterAuthSessionCookie: { sessionCookie: "test" },
+            environment: server.baseUrl,
+        });
 
         const rawResponseBody = {
             target_twitter_id: "target_twitter_id",
@@ -32,7 +37,12 @@ describe("SecsuiteApiClient", () => {
 
     test("predict_predict__twitter_id__get (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SecsuiteApiClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const client = new SecsuiteApiClient({
+            maxRetries: 0,
+            betterAuthApiKey: { apiKey: "test" },
+            betterAuthSessionCookie: { sessionCookie: "test" },
+            environment: server.baseUrl,
+        });
 
         const rawResponseBody = { key: "value" };
 
