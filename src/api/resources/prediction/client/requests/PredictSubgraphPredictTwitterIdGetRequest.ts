@@ -6,6 +6,6 @@
  *         twitter_id: "twitter_id"
  *     }
  */
-export interface PredictPredictTwitterIdGetRequest {
+export interface PredictSubgraphPredictTwitterIdGetRequest {
     twitter_id: string;
 }

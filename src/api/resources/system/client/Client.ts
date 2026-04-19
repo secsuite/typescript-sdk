@@ -7,6 +7,7 @@ import * as core from "../../../../core/index.js";
 import * as environments from "../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
+import type * as SecsuiteApi from "../../../index.js";
 
 export declare namespace SystemClient {
     export type Options = BaseClientOptions;
@@ -22,6 +23,8 @@ export class SystemClient {
     }
 
     /**
+     * Liveness/readiness endpoint.
+     *
      * @param {SystemClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
@@ -29,13 +32,13 @@ export class SystemClient {
      */
     public healthHealthGet(
         requestOptions?: SystemClient.RequestOptions,
-    ): core.HttpResponsePromise<Record<string, string>> {
+    ): core.HttpResponsePromise<SecsuiteApi.BotDetectionHealthResponse> {
         return core.HttpResponsePromise.fromPromise(this.__healthHealthGet(requestOptions));
     }
 
     private async __healthHealthGet(
         requestOptions?: SystemClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Record<string, string>>> {
+    ): Promise<core.WithRawResponse<SecsuiteApi.BotDetectionHealthResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -47,7 +50,7 @@ export class SystemClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.SecsuiteApiEnvironment.Default,
-                "fake-news/health",
+                "bot-detection/health",
             ),
             method: "GET",
             headers: _headers,
@@ -59,7 +62,10 @@ export class SystemClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as Record<string, string>, rawResponse: _response.rawResponse };
+            return {
+                data: _response.body as SecsuiteApi.BotDetectionHealthResponse,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
@@ -70,56 +76,6 @@ export class SystemClient {
             });
         }
 
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/fake-news/health");
-    }
-
-    /**
-     * @param {SystemClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @example
-     *     await client.system.healthCheckHealthGet()
-     */
-    public healthCheckHealthGet(requestOptions?: SystemClient.RequestOptions): core.HttpResponsePromise<unknown> {
-        return core.HttpResponsePromise.fromPromise(this.__healthCheckHealthGet(requestOptions));
-    }
-
-    private async __healthCheckHealthGet(
-        requestOptions?: SystemClient.RequestOptions,
-    ): Promise<core.WithRawResponse<unknown>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.SecsuiteApiEnvironment.Default,
-                "phishing/health",
-            ),
-            method: "GET",
-            headers: _headers,
-            queryParameters: requestOptions?.queryParams,
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return { data: _response.body, rawResponse: _response.rawResponse };
-        }
-
-        if (_response.error.reason === "status-code") {
-            throw new errors.SecsuiteApiError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/phishing/health");
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/bot-detection/health");
     }
 }

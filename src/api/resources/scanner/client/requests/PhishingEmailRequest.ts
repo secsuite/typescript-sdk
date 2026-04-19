@@ -3,10 +3,10 @@
 /**
  * @example
  *     {
- *         text: "Your account will be suspended. Click here to verify."
+ *         text: "text"
  *     }
  */
 export interface PhishingEmailRequest {
-    /** Analiz edilecek e-posta metni */
+    /** Email body text to analyze */
     text: string;
 }

@@ -1,6 +1,6 @@
 {
     "name": "@secsuite/typescript-sdk",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "private": false,
     "repository": {
         "type": "git",
@@ -65,6 +65,17 @@
                 "default": "./dist/cjs/api/resources/scanner/exports.js"
             },
             "default": "./dist/cjs/api/resources/scanner/exports.js"
+        },
+        "./prediction": {
+            "import": {
+                "types": "./dist/esm/api/resources/prediction/exports.d.mts",
+                "default": "./dist/esm/api/resources/prediction/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/prediction/exports.d.ts",
+                "default": "./dist/cjs/api/resources/prediction/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/prediction/exports.js"
         },
         "./package.json": "./package.json"
     },

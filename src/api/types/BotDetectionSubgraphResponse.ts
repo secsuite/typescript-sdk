@@ -2,6 +2,9 @@
 
 import type * as SecsuiteApi from "../index.js";
 
+/**
+ * Response payload returned by /predict/{twitter_id}.
+ */
 export interface BotDetectionSubgraphResponse {
     target_twitter_id: string;
     nodes: SecsuiteApi.BotDetectionNodePrediction[];

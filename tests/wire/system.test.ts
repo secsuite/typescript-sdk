@@ -8,23 +8,17 @@ describe("SystemClient", () => {
         const server = mockServerPool.createServer();
         const client = new SecsuiteApiClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { status: "status", timestamp: "timestamp", model_loaded: true };
 
-        server.mockEndpoint().get("/fake-news/health").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
+        server
+            .mockEndpoint()
+            .get("/bot-detection/health")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
 
         const response = await client.system.healthHealthGet();
-        expect(response).toEqual(rawResponseBody);
-    });
-
-    test("health_check_health_get", async () => {
-        const server = mockServerPool.createServer();
-        const client = new SecsuiteApiClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/phishing/health").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
-
-        const response = await client.system.healthCheckHealthGet();
         expect(response).toEqual(rawResponseBody);
     });
 });

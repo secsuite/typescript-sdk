@@ -1,55 +1,4 @@
 # Reference
-<details><summary><code>client.<a href="/src/Client.ts">predictPredictTwitterIdGet</a>({ ...params }) -> SecsuiteApi.BotDetectionSubgraphResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.predictPredictTwitterIdGet({
-    twitter_id: "twitter_id"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `SecsuiteApi.PredictPredictTwitterIdGetRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `SecsuiteApiClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## Scan
 <details><summary><code>client.scan.<a href="/src/api/resources/scan/client/Client.ts">urlScanPost</a>({ ...params }) -> SecsuiteApi.ScanningScanResponse</code></summary>
 <dl>
@@ -117,9 +66,23 @@ await client.scan.urlScanPost({
 </details>
 
 ## System
-<details><summary><code>client.system.<a href="/src/api/resources/system/client/Client.ts">healthHealthGet</a>() -> Record&lt;string, string&gt;</code></summary>
+<details><summary><code>client.system.<a href="/src/api/resources/system/client/Client.ts">healthHealthGet</a>() -> SecsuiteApi.BotDetectionHealthResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Liveness/readiness endpoint.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -131,47 +94,6 @@ await client.scan.urlScanPost({
 
 ```typescript
 await client.system.healthHealthGet();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `SystemClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.system.<a href="/src/api/resources/system/client/Client.ts">healthCheckHealthGet</a>() -> unknown</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.system.healthCheckHealthGet();
 
 ```
 </dd>
@@ -266,7 +188,7 @@ await client.analysis.analyzeNewsApiV1AnalyzeNewsPost({
 
 ```typescript
 await client.scanner.scanEmailApiV1ScanEmailPost({
-    text: "Your account will be suspended. Click here to verify."
+    text: "text"
 });
 
 ```
@@ -292,6 +214,72 @@ await client.scanner.scanEmailApiV1ScanEmailPost({
 <dd>
 
 **requestOptions:** `ScannerClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Prediction
+<details><summary><code>client.prediction.<a href="/src/api/resources/prediction/client/Client.ts">predictSubgraphPredictTwitterIdGet</a>({ ...params }) -> SecsuiteApi.BotDetectionSubgraphResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Predict bot probabilities for the sampled neighborhood of one Twitter ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.prediction.predictSubgraphPredictTwitterIdGet({
+    twitter_id: "twitter_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `SecsuiteApi.PredictSubgraphPredictTwitterIdGetRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PredictionClient.RequestOptions` 
     
 </dd>
 </dl>

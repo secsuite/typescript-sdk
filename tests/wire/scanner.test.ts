@@ -8,7 +8,7 @@ describe("ScannerClient", () => {
     test("scan_email_api_v1_scan_email_post (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new SecsuiteApiClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = { text: "Your account will be suspended. Click here to verify." };
+        const rawRequestBody = { text: "text" };
         const rawResponseBody = {
             is_phishing: true,
             threat_score_out_of_100: 1,
@@ -26,7 +26,7 @@ describe("ScannerClient", () => {
             .build();
 
         const response = await client.scanner.scanEmailApiV1ScanEmailPost({
-            text: "Your account will be suspended. Click here to verify.",
+            text: "text",
         });
         expect(response).toEqual(rawResponseBody);
     });

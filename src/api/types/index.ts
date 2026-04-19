@@ -1,3 +1,4 @@
+export * from "./BotDetectionHealthResponse.js";
 export * from "./BotDetectionHttpValidationError.js";
 export * from "./BotDetectionNodePrediction.js";
 export * from "./BotDetectionSubgraphResponse.js";

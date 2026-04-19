@@ -9,41 +9,44 @@ import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCode
 import * as errors from "../../../../errors/index.js";
 import * as SecsuiteApi from "../../../index.js";
 
-export declare namespace ScannerClient {
+export declare namespace PredictionClient {
     export type Options = BaseClientOptions;
 
     export interface RequestOptions extends BaseRequestOptions {}
 }
 
-export class ScannerClient {
-    protected readonly _options: NormalizedClientOptionsWithAuth<ScannerClient.Options>;
+export class PredictionClient {
+    protected readonly _options: NormalizedClientOptionsWithAuth<PredictionClient.Options>;
 
-    constructor(options: ScannerClient.Options) {
+    constructor(options: PredictionClient.Options) {
         this._options = normalizeClientOptionsWithAuth(options);
     }
 
     /**
-     * @param {SecsuiteApi.PhishingEmailRequest} request
-     * @param {ScannerClient.RequestOptions} requestOptions - Request-specific configuration.
+     * Predict bot probabilities for the sampled neighborhood of one Twitter ID.
+     *
+     * @param {SecsuiteApi.PredictSubgraphPredictTwitterIdGetRequest} request
+     * @param {PredictionClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link SecsuiteApi.UnprocessableEntityError}
      *
      * @example
-     *     await client.scanner.scanEmailApiV1ScanEmailPost({
-     *         text: "text"
+     *     await client.prediction.predictSubgraphPredictTwitterIdGet({
+     *         twitter_id: "twitter_id"
      *     })
      */
-    public scanEmailApiV1ScanEmailPost(
-        request: SecsuiteApi.PhishingEmailRequest,
-        requestOptions?: ScannerClient.RequestOptions,
-    ): core.HttpResponsePromise<SecsuiteApi.PhishingEmailResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__scanEmailApiV1ScanEmailPost(request, requestOptions));
+    public predictSubgraphPredictTwitterIdGet(
+        request: SecsuiteApi.PredictSubgraphPredictTwitterIdGetRequest,
+        requestOptions?: PredictionClient.RequestOptions,
+    ): core.HttpResponsePromise<SecsuiteApi.BotDetectionSubgraphResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__predictSubgraphPredictTwitterIdGet(request, requestOptions));
     }
 
-    private async __scanEmailApiV1ScanEmailPost(
-        request: SecsuiteApi.PhishingEmailRequest,
-        requestOptions?: ScannerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<SecsuiteApi.PhishingEmailResponse>> {
+    private async __predictSubgraphPredictTwitterIdGet(
+        request: SecsuiteApi.PredictSubgraphPredictTwitterIdGetRequest,
+        requestOptions?: PredictionClient.RequestOptions,
+    ): Promise<core.WithRawResponse<SecsuiteApi.BotDetectionSubgraphResponse>> {
+        const { twitter_id: twitterId } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -55,14 +58,11 @@ export class ScannerClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.SecsuiteApiEnvironment.Default,
-                "phishing/api/v1/scan-email",
+                `bot-detection/predict/${core.url.encodePathParam(twitterId)}`,
             ),
-            method: "POST",
+            method: "GET",
             headers: _headers,
-            contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
-            requestType: "json",
-            body: request,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -70,7 +70,10 @@ export class ScannerClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as SecsuiteApi.PhishingEmailResponse, rawResponse: _response.rawResponse };
+            return {
+                data: _response.body as SecsuiteApi.BotDetectionSubgraphResponse,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
@@ -89,6 +92,11 @@ export class ScannerClient {
             }
         }
 
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/phishing/api/v1/scan-email");
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/bot-detection/predict/{twitter_id}",
+        );
     }
 }

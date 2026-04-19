@@ -4,8 +4,8 @@ import * as SecsuiteApi from "../../src/api/index";
 import { SecsuiteApiClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
-describe("SecsuiteApiClient", () => {
-    test("predict_predict__twitter_id__get (1)", async () => {
+describe("PredictionClient", () => {
+    test("predict_subgraph_predict__twitter_id__get (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new SecsuiteApiClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
@@ -24,13 +24,13 @@ describe("SecsuiteApiClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.predictPredictTwitterIdGet({
+        const response = await client.prediction.predictSubgraphPredictTwitterIdGet({
             twitter_id: "twitter_id",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("predict_predict__twitter_id__get (2)", async () => {
+    test("predict_subgraph_predict__twitter_id__get (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new SecsuiteApiClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
@@ -45,7 +45,7 @@ describe("SecsuiteApiClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.predictPredictTwitterIdGet({
+            return await client.prediction.predictSubgraphPredictTwitterIdGet({
                 twitter_id: "twitter_id",
             });
         }).rejects.toThrow(SecsuiteApi.UnprocessableEntityError);
