@@ -43,10 +43,8 @@ Instantiate and use the client with the following:
 ```typescript
 import { SecsuiteApiClient } from "@secsuite/typescript-sdk";
 
-const client = new SecsuiteApiClient({ apiKey: "YOUR_API_KEY" });
-await client.scan.urlScanPost({
-    url: "url"
-});
+const client = new SecsuiteApiClient({ environment: "YOUR_BASE_URL" });
+await client.documentation.gitHubWebhookForCacheInvalidation();
 ```
 
 ## Environments
@@ -69,7 +67,7 @@ following namespace:
 ```typescript
 import { SecsuiteApi } from "@secsuite/typescript-sdk";
 
-const request: SecsuiteApi.ScanningScanRequest = {
+const request: SecsuiteApi.GetPublicDocsTreeRequest = {
     ...
 };
 ```
@@ -83,7 +81,7 @@ will be thrown.
 import { SecsuiteApiError } from "@secsuite/typescript-sdk";
 
 try {
-    await client.scan.urlScanPost(...);
+    await client.documentation.gitHubWebhookForCacheInvalidation(...);
 } catch (err) {
     if (err instanceof SecsuiteApiError) {
         console.log(err.statusCode);
@@ -101,9 +99,9 @@ try {
 This SDK supports direct imports of subpackage clients, which allows JavaScript bundlers to tree-shake and include only the imported subpackage code. This results in much smaller bundle sizes.
 
 ```typescript
-import { ScanClient } from '@secsuite/typescript-sdk/scan';
+import { IndexClient } from '@secsuite/typescript-sdk/index';
 
-const client = new ScanClient({...});
+const client = new IndexClient({...});
 ```
 
 ### Additional Headers
@@ -120,7 +118,7 @@ const client = new SecsuiteApiClient({
     }
 });
 
-const response = await client.scan.urlScanPost(..., {
+const response = await client.documentation.gitHubWebhookForCacheInvalidation(..., {
     headers: {
         'X-Custom-Header': 'custom value'
     }
@@ -132,7 +130,7 @@ const response = await client.scan.urlScanPost(..., {
 If you would like to send additional query string parameters as part of the request, use the `queryParams` request option.
 
 ```typescript
-const response = await client.scan.urlScanPost(..., {
+const response = await client.documentation.gitHubWebhookForCacheInvalidation(..., {
     queryParams: {
         'customQueryParamKey': 'custom query param value'
     }
@@ -154,7 +152,7 @@ A request is deemed retryable when any of the following HTTP status codes is ret
 Use the `maxRetries` request option to configure this behavior.
 
 ```typescript
-const response = await client.scan.urlScanPost(..., {
+const response = await client.documentation.gitHubWebhookForCacheInvalidation(..., {
     maxRetries: 0 // override maxRetries at the request level
 });
 ```
@@ -164,7 +162,7 @@ const response = await client.scan.urlScanPost(..., {
 The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
 
 ```typescript
-const response = await client.scan.urlScanPost(..., {
+const response = await client.documentation.gitHubWebhookForCacheInvalidation(..., {
     timeoutInSeconds: 30 // override timeout to 30s
 });
 ```
@@ -175,7 +173,7 @@ The SDK allows users to abort requests at any point by passing in an abort signa
 
 ```typescript
 const controller = new AbortController();
-const response = await client.scan.urlScanPost(..., {
+const response = await client.documentation.gitHubWebhookForCacheInvalidation(..., {
     abortSignal: controller.signal
 });
 controller.abort(); // aborts the request
@@ -187,7 +185,7 @@ The SDK provides access to raw response data, including headers, through the `.w
 The `.withRawResponse()` method returns a promise that results to an object with a `data` and a `rawResponse` property.
 
 ```typescript
-const { data, rawResponse } = await client.scan.urlScanPost(...).withRawResponse();
+const { data, rawResponse } = await client.documentation.gitHubWebhookForCacheInvalidation(...).withRawResponse();
 
 console.log(data);
 console.log(rawResponse.headers['X-My-Header']);

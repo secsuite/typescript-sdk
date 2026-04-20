@@ -1,6 +1,6 @@
 {
     "name": "@secsuite/typescript-sdk",
-    "version": "0.0.10",
+    "version": "0.0.11",
     "private": false,
     "repository": {
         "type": "git",
@@ -22,60 +22,93 @@
             },
             "default": "./dist/cjs/index.js"
         },
-        "./scan": {
+        "./index": {
             "import": {
-                "types": "./dist/esm/api/resources/scan/exports.d.mts",
-                "default": "./dist/esm/api/resources/scan/exports.mjs"
+                "types": "./dist/esm/api/resources/index/exports.d.mts",
+                "default": "./dist/esm/api/resources/index/exports.mjs"
             },
             "require": {
-                "types": "./dist/cjs/api/resources/scan/exports.d.ts",
-                "default": "./dist/cjs/api/resources/scan/exports.js"
+                "types": "./dist/cjs/api/resources/index/exports.d.ts",
+                "default": "./dist/cjs/api/resources/index/exports.js"
             },
-            "default": "./dist/cjs/api/resources/scan/exports.js"
+            "default": "./dist/cjs/api/resources/index/exports.js"
         },
-        "./system": {
+        "./documentation": {
             "import": {
-                "types": "./dist/esm/api/resources/system/exports.d.mts",
-                "default": "./dist/esm/api/resources/system/exports.mjs"
+                "types": "./dist/esm/api/resources/documentation/exports.d.mts",
+                "default": "./dist/esm/api/resources/documentation/exports.mjs"
             },
             "require": {
-                "types": "./dist/cjs/api/resources/system/exports.d.ts",
-                "default": "./dist/cjs/api/resources/system/exports.js"
+                "types": "./dist/cjs/api/resources/documentation/exports.d.ts",
+                "default": "./dist/cjs/api/resources/documentation/exports.js"
             },
-            "default": "./dist/cjs/api/resources/system/exports.js"
+            "default": "./dist/cjs/api/resources/documentation/exports.js"
         },
-        "./analysis": {
+        "./config": {
             "import": {
-                "types": "./dist/esm/api/resources/analysis/exports.d.mts",
-                "default": "./dist/esm/api/resources/analysis/exports.mjs"
+                "types": "./dist/esm/api/resources/config/exports.d.mts",
+                "default": "./dist/esm/api/resources/config/exports.mjs"
             },
             "require": {
-                "types": "./dist/cjs/api/resources/analysis/exports.d.ts",
-                "default": "./dist/cjs/api/resources/analysis/exports.js"
+                "types": "./dist/cjs/api/resources/config/exports.d.ts",
+                "default": "./dist/cjs/api/resources/config/exports.js"
             },
-            "default": "./dist/cjs/api/resources/analysis/exports.js"
+            "default": "./dist/cjs/api/resources/config/exports.js"
         },
-        "./scanner": {
+        "./updater": {
             "import": {
-                "types": "./dist/esm/api/resources/scanner/exports.d.mts",
-                "default": "./dist/esm/api/resources/scanner/exports.mjs"
+                "types": "./dist/esm/api/resources/updater/exports.d.mts",
+                "default": "./dist/esm/api/resources/updater/exports.mjs"
             },
             "require": {
-                "types": "./dist/cjs/api/resources/scanner/exports.d.ts",
-                "default": "./dist/cjs/api/resources/scanner/exports.js"
+                "types": "./dist/cjs/api/resources/updater/exports.d.ts",
+                "default": "./dist/cjs/api/resources/updater/exports.js"
             },
-            "default": "./dist/cjs/api/resources/scanner/exports.js"
+            "default": "./dist/cjs/api/resources/updater/exports.js"
         },
-        "./prediction": {
+        "./desktopAuth": {
             "import": {
-                "types": "./dist/esm/api/resources/prediction/exports.d.mts",
-                "default": "./dist/esm/api/resources/prediction/exports.mjs"
+                "types": "./dist/esm/api/resources/desktopAuth/exports.d.mts",
+                "default": "./dist/esm/api/resources/desktopAuth/exports.mjs"
             },
             "require": {
-                "types": "./dist/cjs/api/resources/prediction/exports.d.ts",
-                "default": "./dist/cjs/api/resources/prediction/exports.js"
+                "types": "./dist/cjs/api/resources/desktopAuth/exports.d.ts",
+                "default": "./dist/cjs/api/resources/desktopAuth/exports.js"
             },
-            "default": "./dist/cjs/api/resources/prediction/exports.js"
+            "default": "./dist/cjs/api/resources/desktopAuth/exports.js"
+        },
+        "./gateway": {
+            "import": {
+                "types": "./dist/esm/api/resources/gateway/exports.d.mts",
+                "default": "./dist/esm/api/resources/gateway/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/gateway/exports.d.ts",
+                "default": "./dist/cjs/api/resources/gateway/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/gateway/exports.js"
+        },
+        "./history": {
+            "import": {
+                "types": "./dist/esm/api/resources/history/exports.d.mts",
+                "default": "./dist/esm/api/resources/history/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/history/exports.d.ts",
+                "default": "./dist/cjs/api/resources/history/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/history/exports.js"
+        },
+        "./settings": {
+            "import": {
+                "types": "./dist/esm/api/resources/settings/exports.d.mts",
+                "default": "./dist/esm/api/resources/settings/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/settings/exports.d.ts",
+                "default": "./dist/cjs/api/resources/settings/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/settings/exports.js"
         },
         "./package.json": "./package.json"
     },
